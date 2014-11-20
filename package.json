@@ -1,0 +1,20 @@
+{
+    "name": "nicolo-ribaudo.brackets-svg-font",
+    "version": "0.1.0",
+    "title": "Svg Font",
+    "description": "Display Svg Fonts",
+    "engines": {
+        "brackets": ">=0.1"
+    },
+    "homepage": "https://github.com/nicolo-ribaudo/brackets-svg-font",
+    "author": "Nicolò Ribaudo <nicolo.ribaudo@gmail.com> (http://github.com/nicolo-ribaudo)",
+    "license": "MIT",
+    "keywords": [
+        "svg", "font"
+    ],
+    "package-i18n": {
+        "it": {
+            "description": "Visualizza i Font Svg"
+        }
+    }
+}
