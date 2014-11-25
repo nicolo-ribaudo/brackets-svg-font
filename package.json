@@ -4,7 +4,7 @@
     "title": "Svg Font",
     "description": "Display Svg Fonts",
     "engines": {
-        "brackets": ">=0.1"
+        "brackets": ">=1.0"
     },
     "homepage": "https://github.com/nicolo-ribaudo/brackets-svg-font",
     "author": "Nicolò Ribaudo <nicolo.ribaudo@gmail.com> (http://github.com/nicolo-ribaudo)",
