@@ -26,7 +26,6 @@
                         style: solid;
                         width: thin;
                     };
-                    line-height: normal; //?
                     padding: 10px;
                     position: relative;
 
@@ -37,7 +36,7 @@
                         };
                         height: 70px;
                         line-height: 70px;
-                        margin: auto; //?
+                        margin: auto;
                         position: relative;
                         text-align: center;
                         width: 70px;
@@ -52,7 +51,6 @@
                         box-shadow: 0px 3px 9px rgba(0, 0, 0, .24);
                         display: none;
                         left: -10px;
-                        min-height: calc(100% + 20px); //?
                         padding: 10px {
                             top: 100px;
                             };
@@ -62,12 +60,10 @@
                         z-index: 2;
 
                         dt {
-                            clear: left; //?
                             float: left;
                         }
 
                         dl {
-                            clear: right; //?
                             float: right;
                             margin: 0px;
 

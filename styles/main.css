@@ -1,79 +1,60 @@
 .svg-font-viewer {
-  height: 100%;
-}
-.svg-font-viewer, .svg-font-viewer * {
-  box-sizing: border-box;
-}
-.svg-font-viewer .font-container {
-  height: 100%;
-  overflow-y: auto;
-  padding: 15px;
-}
-.svg-font-viewer .font-container > div {
-  display: flex;
-  flex-wrap: wrap;
-}
-.svg-font-viewer .font-container > div div {
-  flex-basis: 120px;
-  flex-grow: 1;
-}
-.svg-font-viewer .font-container > div div.glyph {
-  border-color: #f0f0f0;
-  border-style: solid;
-  border-width: thin;
-  line-height: normal;
-  padding: 10px;
-  position: relative;
-}
-.svg-font-viewer .font-container > div div.glyph .preview {
-  font-family: "Svg Font Viewer";
-  font-size: 50px;
-  height: 70px;
-  line-height: 70px;
-  margin: auto;
-  position: relative;
-  text-align: center;
-  width: 70px;
-}
-.svg-font-viewer .font-container > div div.glyph.open .preview {
-  z-index: 3;
-}
-.svg-font-viewer .font-container > div div.glyph .description {
-  background-color: #ffffff;
-  box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.24);
-  display: none;
-  left: -10px;
-  min-height: calc(100% + 20px);
-  padding: 10px;
-  padding-top: 100px;
-  position: absolute;
-  top: -10px;
-  width: calc(100% + 20px);
-  z-index: 2;
-}
-.svg-font-viewer .font-container > div div.glyph .description dt {
-  clear: left;
-  float: left;
-}
-.svg-font-viewer .font-container > div div.glyph .description dl {
-  clear: right;
-  float: right;
-  margin: 0px;
-}
-.svg-font-viewer .font-container > div div.glyph .description dl.glyph-name span:not(:last-child)::after {
-  content: " ";
-}
-.svg-font-viewer .font-container > div div.glyph.to-top .description {
-  bottom: -10px;
-  padding: 10px;
-  padding-bottom: 100px;
-  top: auto;
-}
-.svg-font-viewer .font-container > div div.glyph.open .description {
-  display: block;
-}
-.svg-font-viewer .font-container > div div:empty {
-  height: 0px;
-}
+  height: 100%; }
+  .svg-font-viewer, .svg-font-viewer * {
+    box-sizing: border-box; }
+  .svg-font-viewer .font-container {
+    height: 100%;
+    overflow-y: auto;
+    padding: 15px; }
+    .svg-font-viewer .font-container > div {
+      display: flex;
+      flex-wrap: wrap; }
+      .svg-font-viewer .font-container > div div {
+        flex-basis: 120px;
+        flex-grow: 1; }
+        .svg-font-viewer .font-container > div div.glyph {
+          border-color: #f0f0f0;
+          border-style: solid;
+          border-width: thin;
+          padding: 10px;
+          position: relative; }
+          .svg-font-viewer .font-container > div div.glyph .preview {
+            font-family: "Svg Font Viewer";
+            font-size: 50px;
+            height: 70px;
+            line-height: 70px;
+            margin: auto;
+            position: relative;
+            text-align: center;
+            width: 70px; }
+          .svg-font-viewer .font-container > div div.glyph.open .preview {
+            z-index: 3; }
+          .svg-font-viewer .font-container > div div.glyph .description {
+            background-color: #ffffff;
+            box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.24);
+            display: none;
+            left: -10px;
+            padding: 10px;
+              padding-top: 100px;
+            position: absolute;
+            top: -10px;
+            width: calc(100% + 20px);
+            z-index: 2; }
+            .svg-font-viewer .font-container > div div.glyph .description dt {
+              float: left; }
+            .svg-font-viewer .font-container > div div.glyph .description dl {
+              float: right;
+              margin: 0px; }
+              .svg-font-viewer .font-container > div div.glyph .description dl.glyph-name span:not(:last-child)::after {
+                content: " "; }
+          .svg-font-viewer .font-container > div div.glyph.to-top .description {
+            bottom: -10px;
+            padding: 10px;
+              padding-bottom: 100px;
+            top: auto; }
+          .svg-font-viewer .font-container > div div.glyph.open .description {
+            display: block; }
+        .svg-font-viewer .font-container > div div:empty {
+          height: 0px; }
 
 /*# sourceMappingURL=main.css.map */
