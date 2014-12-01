@@ -1,0 +1,10 @@
+{
+    "path": {
+        "styles/main.scss": {
+            "sass.enabled": true,
+            "sass.options": {
+                "outputStyle": "compressed"
+            }
+        }
+    }
+}
