@@ -1,4 +1,4 @@
-/*jslint vars: true, plusplus: true, devel: true, nomen: true, regexp: true, indent: 4, maxerr: 50 */
+/*jslint regexp: true */
 /*global $, brackets, define, Mustache */
 
 define(function (require, exports, module) {
