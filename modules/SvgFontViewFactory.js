@@ -8,18 +8,14 @@ define(function (require, exports, module) {
     var DocumentManager = brackets.getModule("document/DocumentManager"),
         Editor = brackets.getModule("editor/Editor").Editor,
         LanguageManager = brackets.getModule("language/LanguageManager"),
-        SvgFontViewer = require("modules/SvgFontView");
+        SvgFontView = require("modules/SvgFontView");
 
     /**
      * @param {!string} path - The path of the file
      * @return {boolean} Can the file be opened?
      */
     function canOpenFile(path) {
-        var language = LanguageManager.getLanguageForPath(path).getId();
-        if (language === "svg") {
-            return true;
-        }
-        return false;
+        return (/\.svg$/i).test(path);
     }
 
     /**
@@ -34,7 +30,7 @@ define(function (require, exports, module) {
             pane.showView(view);
             deferred.resolve(file);
         } else {
-            view = new SvgFontViewer(file, pane.$el);
+            view = new SvgFontView(file, pane.$el);
             pane.addView(view, true);
             view.promise.then(function () {
                 view.create();
