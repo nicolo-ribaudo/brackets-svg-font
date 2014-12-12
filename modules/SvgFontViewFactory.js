@@ -4,7 +4,7 @@
 define(function (require, exports, module) {
     "use strict";
 
-    // __ MODULES
+    // -- MODULES
     var DocumentManager = brackets.getModule("document/DocumentManager"),
         Editor = brackets.getModule("editor/Editor").Editor,
         LanguageManager = brackets.getModule("language/LanguageManager"),

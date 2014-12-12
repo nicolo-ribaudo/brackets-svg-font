@@ -1,6 +1,6 @@
 # Brackets SVG Font
 
-Brackets extension that displays Svg Fonts.
+An [Adobe Brackets](https://github.com/adobe/brackets) extension that displays Svg Fonts.
 
 ## Usage
 You don't have to do nothing!
