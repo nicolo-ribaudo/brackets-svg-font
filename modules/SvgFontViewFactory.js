@@ -35,7 +35,6 @@ define(function (require, exports, module) {
                 view.create();
                 deferred.resolve(file);
             }, function () {
-                console.log(arguments);
                 DocumentManager.getDocumentForPath(file.fullPath).then(function (document) {
                     var editor = new Editor(document, true, pane.$el);
                     pane.addView(editor, true);

@@ -31,7 +31,7 @@ define(function (require, exports, module) {
             path: file.fullPath
         })).on("mouseenter", ".glyph", function () {
             var $this = $(this),
-                equator = $this.parents(".svg-font-viewer").height() / 2;
+                equator = $this.parents("[data-id='svg-font-viewer']").height() / 2;
             $this.addClass("open");
             if ($this.position().top > equator) {
                 $this.addClass("to-top");
