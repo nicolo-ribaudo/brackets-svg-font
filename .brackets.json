@@ -6,13 +6,5 @@
         "nomen": true,
         "indent": 4,
         "maxerr": 50
-    },
-    "path": {
-        "styles/main.scss": {
-            "sass.enabled": true,
-            "sass.options": {
-                "outputStyle": "compressed"
-            }
-        }
     }
 }
