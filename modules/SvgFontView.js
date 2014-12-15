@@ -8,12 +8,12 @@ define(function (require, exports, module) {
     var ExtensionUtils = brackets.getModule("utils/ExtensionUtils"),
         WorkspaceManager = brackets.getModule("view/WorkspaceManager"),
         // -- TEMPLATES
-        svgFontViewerContainerTemplate = require("text!../html/svg-font-view-container.html"),
-        svgFontViewerGlyphsTemplate = require("text!../html/svg-font-view-glyphs.html");
+        fontViewerContainerTemplate = require("text!../html/font-view-container.html"),
+        fontViewerGlyphsTemplate = require("text!../html/font-view-glyphs.html");
 
     // Prepare templates for future renders
-    Mustache.parse(svgFontViewerContainerTemplate);
-    Mustache.parse(svgFontViewerGlyphsTemplate);
+    Mustache.parse(fontViewerContainerTemplate);
+    Mustache.parse(fontViewerGlyphsTemplate);
 
     // Load StyleSheets
     ExtensionUtils.loadStyleSheet(module, "../styles/main.css");
@@ -27,11 +27,12 @@ define(function (require, exports, module) {
         this._file = file;
         this.promise = this._refresh();
         this._$container = $container;
-        this.$el = $(Mustache.render(svgFontViewerContainerTemplate, {
-            path: file.fullPath
+        this.$el = $(Mustache.render(fontViewerContainerTemplate, {
+            path: file.fullPath,
+            type: this._fontType
         })).on("mouseenter", ".glyph", function () {
             var $this = $(this),
-                equator = $this.parents("[data-id='svg-font-viewer']").height() / 2;
+                equator = $this.parents("[data-id='font-view']").height() / 2;
             $this.addClass("open");
             if ($this.position().top > equator) {
                 $this.addClass("to-top");
@@ -70,6 +71,12 @@ define(function (require, exports, module) {
      * @type {String}
      */
     SvgFontView.prototype._fileContent = null;
+
+    /**
+     * @private
+     * @type {string}
+     */
+    SvgFontView.prototype._fontType = "svg";
 
     /**
      * An array of font's glyphs
@@ -137,32 +144,21 @@ define(function (require, exports, module) {
                 i = 0;
             if ($this.is("[unicode]")) {
                 var unicode = $this.attr("unicode"),
-                    character,
+                    hex,
                     charEnd,
-                    char,
-                    dec;
+                    char;
                 if (unicode !== "") {
                     while (i < unicode.length) {
                         if (unicode[i] !== "&") {
-                            dec = unicode[i].charCodeAt(0);
-                            character = {
-                                dec: dec,
-                                hex: dec.toString(16)
-                            };
+                            hex = unicode[i].charCodeAt(0).toString(16);
                             i++;
                         } else {
                             charEnd = unicode.indexOf(";", i);
                             char = unicode.substring(i + 1, charEnd - 1);
-                            dec = +(char[0] === "x" ? "0" + char : char);
-                            character = {
-                                dec: dec,
-                                hex: dec.toString(16)
-                            };
+                            hex = +(char[0] === "x" ? "0" + char : char).toString(16);
                             i = charEnd + 1;
                         }
-                        character.render = character.dec > 31 && character.dec < 127 ? String.fromCharCode(character.dec) : "&#x" + character.hex + ";";
-                        character.render = "&#" + character.dec + ";";
-                        description.unicode.push(character);
+                        description.unicode.push(hex);
                     }
                 }
             }
@@ -223,7 +219,7 @@ define(function (require, exports, module) {
         var emptyBlocks = [],
             $glyphs;
         emptyBlocks.length = this._maxGlyphsPerLine;
-        $glyphs = $(Mustache.render(svgFontViewerGlyphsTemplate, {
+        $glyphs = $(Mustache.render(fontViewerGlyphsTemplate, {
             glyphs: this._glyphs,
             emptyBlocks: emptyBlocks
         }));

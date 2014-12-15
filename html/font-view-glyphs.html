@@ -1,26 +1,26 @@
 {{#glyphs}}
 <div class="glyph" data-n-char="{{unicode.length}}">
     <div class="preview">
-        {{#unicode}}&#x{{hex}};{{/unicode}}
+        {{#unicode}}&#x{{.}};{{/unicode}}
     </div>
-    <div class="description">
+    <dl class="description">
         {{#unicode.length}}
         <dt>Unicode</dt>
-        <dl>
+        <dd>
             {{#unicode}}
-            <span>{{render}}</span>
+            <span>&amp;#x{{.}};</span>
             {{/unicode}}
-        </dl>
+        </dd>
         {{/unicode.length}}
         {{#name.length}}
         <dt>Name</dt>
-        <dl class="glyph-name">
+        <dd class="glyph-name">
             {{#name}}
             <span>{{.}}</span>
             {{/name}}
-        </dl>
+        </dd>
         {{/name.length}}
-    </div>
+    </dl>
 </div>
 {{/glyphs}}
 {{#emptyBlocks}}

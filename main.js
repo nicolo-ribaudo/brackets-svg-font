@@ -6,7 +6,7 @@ define(function (require, exports, module) {
     // -- MODULES
     var LanguageManager = brackets.getModule("language/LanguageManager"),
         MainViewFactory = brackets.getModule("view/MainViewFactory"),
-        SvgFontViewFactory = require("modules/SvgFontViewFactory");
+        FontViewFactory = require("modules/FontViewFactory");
 
-    MainViewFactory.registerViewFactory(SvgFontViewFactory);
+    MainViewFactory.registerViewFactory(FontViewFactory);
 });
