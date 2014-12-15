@@ -53,7 +53,7 @@ define(function (require, exports, module) {
      * @type {jQuery}
      */
     SvgFontView.prototype._$font = null;
-    
+
     /**
      * @private
      + @type {Boolean}
@@ -65,7 +65,7 @@ define(function (require, exports, module) {
      * @type {File}
      */
     SvgFontView.prototype._file = null;
-    
+
     /**
      * @private
      * @type {String}
@@ -114,7 +114,7 @@ define(function (require, exports, module) {
                     var parsedContent = $.parseXML(content.replace(/\n\r|\n|\r/g, "").match(/<svg.*?<\/svg>/i)[0]);
                     this._$font = $(parsedContent).find("font");
                     this._fileContent = content;
-                    deferred.resolve(this._$font);
+                    deferred.resolve();
                 } catch (e) {
                     deferred.reject(new Error("Not valid svg"));
                 }
@@ -132,7 +132,7 @@ define(function (require, exports, module) {
     SvgFontView.prototype._parseFont = function () {
         var $glyphs = this._$font.find("glyph").filter(function () {
             var $this = $(this);
-            return ($this.attr("d") || $this.children().length) && ($this.attr("unicode") || $this.attr("glyph-name"));
+            return $this.attr("d") && $this.attr("unicode");
         }),
             glyphs = [];
         $glyphs.each(function () {
@@ -141,26 +141,22 @@ define(function (require, exports, module) {
                     unicode: [],
                     name: []
                 },
-                i = 0;
-            if ($this.is("[unicode]")) {
-                var unicode = $this.attr("unicode"),
-                    hex,
-                    charEnd,
-                    char;
-                if (unicode !== "") {
-                    while (i < unicode.length) {
-                        if (unicode[i] !== "&") {
-                            hex = unicode[i].charCodeAt(0).toString(16);
-                            i++;
-                        } else {
-                            charEnd = unicode.indexOf(";", i);
-                            char = unicode.substring(i + 1, charEnd - 1);
-                            hex = +(char[0] === "x" ? "0" + char : char).toString(16);
-                            i = charEnd + 1;
-                        }
-                        description.unicode.push(hex);
-                    }
+                i = 0,
+                unicode = $this.attr("unicode"),
+                hex,
+                charEnd,
+                char;
+            while (i < unicode.length) {
+                if (unicode[i] !== "&" || unicode[i + 1] !== "#") {
+                    hex = unicode.charCodeAt(i).toString(16);
+                    i++;
+                } else {
+                    charEnd = unicode.indexOf(";", i);
+                    char = unicode.substring(i + 1, charEnd - 1);
+                    hex = +(char[0] === "x" ? "0" + char : char).toString(16);
+                    i = charEnd + 1;
                 }
+                description.unicode.push(hex);
             }
             if ($this.is("[glyph-name]") && $this.attr("glyph-name")) {
                 description.name = $this.attr("glyph-name").split(" ");
@@ -179,9 +175,9 @@ define(function (require, exports, module) {
                     } else {
                         var i = 0;
                         do {
-                            if (first[properties[j]][i].dec < second[properties[j]][i].dec) {
+                            if (parseInt(first[properties[j]][i], 16) < parseInt(second[properties[j]][i], 16)) {
                                 return -1;
-                            } else if (first[properties[j]][i].dec > second[properties[j]][i].dec) {
+                            } else if (parseInt(first[properties[j]][i], 16) > parseInt(second[properties[j]][i], 16)) {
                                 return 1;
                             }
                         } while (++i < first[properties[j]].length);
