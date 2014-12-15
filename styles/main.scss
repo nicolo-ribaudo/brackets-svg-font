@@ -1,8 +1,50 @@
 [data-id="font-view"] {
     height: 100%;
+    position: relative;
 
-    &, * {
+    &, *, *::after, *::before {
         box-sizing: border-box;
+    }
+
+    .loader {
+        -webkit-animation: rotateplane 1.2s infinite ease-in-out;
+        animation: rotateplane 1.2s infinite ease-in-out;
+        border: {
+            color: #2098f5;
+            width: 15px;
+            left: {
+                style: solid;
+            };
+            right: {
+                style: solid;
+            };
+        };
+        height: 60px;
+        left: calc(50% - 30px);
+        opacity: .36;
+        padding: 15px;
+        position: absolute;
+        top: calc(50% - 30px);
+        width: 60px;
+
+        &::before, &::after {
+            border-left: 11px solid #2098f5;
+            border-right: 11px solid #2098f5;
+            content: "";
+            display: block;
+            position: absolute;
+            width: 32px;
+            height: 15px;
+            left: -1px;
+        }
+
+        &::before {
+            top: 0px;
+        }
+
+        &::after {
+            bottom: 0px;
+        }
     }
 
     .font-container {
@@ -11,8 +53,10 @@
         padding: 15px;
 
         > div {
+            background-color: #ffffff;
             display: flex;
             flex-wrap: wrap;
+            position: relative;
 
             div {
                 flex: {
@@ -88,11 +132,38 @@
                         display: block;
                     }
                 }
-                
+
                 &:empty {
                     height: 0px;
                 }
             }
         }
+    }
+}
+
+@-webkit-keyframes rotateplane {
+    0% {
+        -webkit-transform: perspective(120px);
+    }
+    50% {
+        -webkit-transform: perspective(120px) rotateY(180deg);
+    }
+    100% {
+        -webkit-transform: perspective(120px) rotateY(180deg) rotateX(180deg);
+    }
+}
+
+@keyframes rotateplane {
+    0% {
+        -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+        transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+    }
+    50% {
+        -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+        transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+    }
+    100% {
+        -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+        transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
     }
 }
