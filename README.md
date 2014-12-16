@@ -6,7 +6,7 @@ An [Adobe Brackets](https://github.com/adobe/brackets) extension that displays S
 You don't have to do nothing!
 Just open the file and, if it is a svg font, it will be displayed like this:
 
-![](http://s30.postimg.org/b83yiurld/font_preview.jpg "Font Preview")
+![](http://s11.postimg.org/meytzjd9f/Font_Preview.jpg "Font Preview")
 
 ## Installation
 You may download and install this extension in one of three ways. Using Extension Manager to find it through the extension registry you always find the latest stable release conveniently within Brackets.
