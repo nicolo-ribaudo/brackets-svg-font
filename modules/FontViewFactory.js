@@ -7,6 +7,7 @@ define(function (require, exports, module) {
     var DocumentManager = brackets.getModule("document/DocumentManager"),
         Editor = brackets.getModule("editor/Editor").Editor,
         LanguageManager = brackets.getModule("language/LanguageManager"),
+        BinaryFontView = require("modules/BinaryFontView"),
         SvgFontView = require("modules/SvgFontView");
 
     /**
@@ -14,7 +15,7 @@ define(function (require, exports, module) {
      * @return {boolean} Can the file be opened?
      */
     function canOpenFile(path) {
-        return (/\.svg$/i).test(path);
+        return (/\.(svg|ttf)$/i).test(path);
     }
 
     /**
@@ -29,7 +30,11 @@ define(function (require, exports, module) {
             pane.showView(view);
             deferred.resolve(file);
         } else {
-            view = new SvgFontView(file, pane.$el);
+            if ((/\.svg$/i).test(file.fullPath)) {
+                view = new SvgFontView(file, pane.$el);
+            } else {
+                view = new BinaryFontView(file, pane.$el);
+            }
             pane.addView(view, true);
             view.promise.then(function () {
                 view.create();
