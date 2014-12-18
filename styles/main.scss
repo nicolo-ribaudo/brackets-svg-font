@@ -52,8 +52,11 @@
         overflow-y: auto;
         padding: 15px;
 
+        * {
+            background-color: inherit;
+        }
+
         > div {
-            background-color: #ffffff;
             display: flex;
             flex-wrap: wrap;
             position: relative;
@@ -91,7 +94,6 @@
                     }
 
                     .description {
-                        background-color: #ffffff;
                         box-shadow: 0px 3px 9px rgba(0, 0, 0, .24);
                         display: none;
                         left: -10px;

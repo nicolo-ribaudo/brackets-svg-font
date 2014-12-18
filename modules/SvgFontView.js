@@ -19,6 +19,16 @@ define(function (require, exports, module) {
     ExtensionUtils.loadStyleSheet(module, "../styles/main.css");
 
     /**
+     * Get the current theme's background color
+     */
+    function _getBgColor() {
+        var $CM = $("<div class='CodeMirror'>").appendTo("#editor-holder"),
+            bgColor = $CM.css("background-color");
+        $CM.remove();
+        return bgColor;
+    }
+
+    /**
      * @constructor
      * @param {File} file - The svg font file to render
      * @param {jQuery} $container - The element to render the svg font view in
@@ -29,7 +39,8 @@ define(function (require, exports, module) {
         this._$container = $container;
         this.$el = $(Mustache.render(fontViewerContainerTemplate, {
             path: file.fullPath,
-            type: this._fontType
+            type: this._fontType,
+            background: _getBgColor()
         })).on("mouseenter", ".glyph", function () {
             var $this = $(this),
                 equator = $this.parents("[data-id='font-view']").height() / 2;
