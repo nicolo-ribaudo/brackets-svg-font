@@ -1,6 +1,6 @@
 {
     "name": "nicolo-ribaudo.brackets-svg-font",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "title": "Svg Font",
     "description": "This extensions displays Svg and TrueType fonts",
     "engines": {
@@ -18,7 +18,7 @@
     ],
     "package-i18n": {
         "it": {
-            "description": "Visualizza i Font Svg e TrueType"
+            "description": "Questa estensione visualizza i Font Svg e TrueType"
         }
     }
 }
