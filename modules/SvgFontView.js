@@ -124,8 +124,12 @@ define(function (require, exports, module) {
                 try {
                     var parsedContent = $.parseXML(content.replace(/\n\r|\n|\r/g, "").match(/<svg.*?<\/svg>/i)[0]);
                     this._$font = $(parsedContent).find("font");
-                    this._fileContent = content;
-                    deferred.resolve();
+                    if (!this._$font.length || !this._$font.find("glyph").length) {
+                        deferred.reject(new Error("Not valid font"));
+                    } else {
+                        this._fileContent = content;
+                        deferred.resolve();
+                    }
                 } catch (e) {
                     deferred.reject(new Error("Not valid svg"));
                 }
@@ -215,7 +219,9 @@ define(function (require, exports, module) {
             this._parseFont();
             deferred.resolve();
         }.bind(this), deferred.reject.bind(deferred));
-        return deferred.promise();
+        return deferred.promise().fail(function () {
+            console.log("not a font");
+        });
     };
 
     /**
