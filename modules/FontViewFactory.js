@@ -36,7 +36,7 @@ define(function (require, exports, module) {
                 view = new BinaryFontView(file, pane.$el);
             }
             pane.addView(view, true);
-            view.promise.then(function () {
+            view.promise().then(function () {
                 view.create();
                 deferred.resolve(file);
             }, function () {

@@ -9,13 +9,14 @@ define(function (require, exports, module) {
         // -- MODULES
         ExtensionUtils = brackets.getModule("utils/ExtensionUtils"),
         NodeDomain = brackets.getModule("utils/NodeDomain"),
+        FontView = require("modules/FontView"),
         SvgFontView = require("modules/SvgFontView"),
         // -- VARIABLES
         FontConverter = new NodeDomain(NODE_DOMAIN, ExtensionUtils.getModulePath(module, "../node/FontConverter.js"));
 
     function BinaryFontView(file, $container) {
         this._fontType = this._extensions[file.fullPath.match(/[a-z]+$/i)[0]];
-        this.parentClass.apply(this, arguments);
+        this.parentClass.constructor.apply(this, arguments);
     }
 
     BinaryFontView.prototype = Object.create(SvgFontView.prototype, {
@@ -26,7 +27,7 @@ define(function (require, exports, module) {
             writable: true
         },
         parentClass: {
-            value: SvgFontView,
+            value: FontView.prototype,
             configurable: true,
             enumerable: false,
             writable: true
@@ -51,9 +52,10 @@ define(function (require, exports, module) {
     };
 
     BinaryFontView.prototype._parseFont = function () {
-        // Why are some glyphs added?
-        this.parentClass.prototype._parseFont.call(this);
+        // When a font parser will be used (instead of a converter), BinaryFontView won't depend on SvgFontView
+        SvgFontView.prototype._parseFont.call(this);
 
+        // Why are some glyphs added?
         this._glyphs = this._glyphs.filter(function (glyph, i) {
             var joined = glyph.unicode.join();
             return this._glyphs.every(function (glyph, x) {
