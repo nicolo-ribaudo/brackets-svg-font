@@ -19,7 +19,7 @@ define(function (require, exports, module) {
         this.parentClass.constructor.apply(this, arguments);
     }
 
-    BinaryFontView.prototype = Object.create(SvgFontView.prototype, {
+    BinaryFontView.prototype = Object.create(FontView.prototype, {
         constructor: {
             value: BinaryFontView,
             configurable: true,
