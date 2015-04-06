@@ -1,0 +1,16 @@
+Open($1);
+
+output = "[";
+
+SelectWorthOutputting();
+foreach
+    unicode = GlyphInfo("Unicode");
+    name = GlyphInfo("Name");
+    if (unicode >= 0 && name != ".notdef")
+        output += '{"unicode":' + unicode + ',"name":"' + name + '"},';
+    endif;
+endloop;
+
+output = Strsub(output, 0, Strlen(output) - 1) + "]";
+
+Print(output);

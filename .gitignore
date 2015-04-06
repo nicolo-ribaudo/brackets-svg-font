@@ -1,2 +1,7 @@
-fonts/
-styles/.sass-cache/
+.sass-cache/
+node_modules/
+dist/
+maps/
+release/
+.brackets.json
+npm-debug.log

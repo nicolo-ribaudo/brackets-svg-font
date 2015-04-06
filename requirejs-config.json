@@ -1,0 +1,6 @@
+{
+    "paths": {
+        "modules": "dist/modules",
+        "html": "dist/html"
+    }
+}

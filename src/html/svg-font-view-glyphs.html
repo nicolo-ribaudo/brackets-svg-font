@@ -1,0 +1,24 @@
+{{ #glyphs }}
+<div class="glyph">
+    <div class="preview">
+        <svg viewBox="0 {{ size.descent }} {{ size.upe }} {{ size.upe }}">
+            <path d="{{{ path }}}"></path>
+        </svg>
+    </div>
+    <dl class="description">
+        <dt>Unicode</dt>
+        <dd>
+            <span>&amp;#x{{ unicode }};</span>
+        </dd>
+        {{ #name }}
+        <dt>Name</dt>
+        <dd class="glyph-name">
+            <span>{{ name }}</span>
+        </dd>
+        {{ /name }}
+    </dl>
+</div>
+{{ /glyphs }}
+{{ #emptyBlocks }}
+<div></div>
+{{ /emptyBlocks }}

@@ -1,12 +1,7 @@
-/*global brackets, define */
+/*global define */
 
-define(function (require, exports, module) {
+define(function (require) {
     "use strict";
     
-    // -- MODULES
-    var LanguageManager = brackets.getModule("language/LanguageManager"),
-        MainViewFactory = brackets.getModule("view/MainViewFactory"),
-        FontViewFactory = require("modules/FontViewFactory");
-
-    MainViewFactory.registerViewFactory(FontViewFactory);
+    require([ "dist/main" ]);
 });

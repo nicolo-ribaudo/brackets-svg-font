@@ -1,0 +1,28 @@
+<style>
+    @font-face {
+        font-family: "Binary Font View";
+        src: url("{{{ path }}}") format("{{ type }}");
+    }
+</style>
+{{ #glyphs }}
+<div class="glyph">
+    <div class="preview">
+        &#x{{ unicode }};
+    </div>
+    <dl class="description">
+        <dt>Unicode</dt>
+        <dd>
+            <span>&amp;#x{{ unicode }};</span>
+        </dd>
+        {{ #name }}
+        <dt>Name</dt>
+        <dd class="glyph-name">
+            <span>{{ name }}</span>
+        </dd>
+        {{ /name }}
+    </dl>
+</div>
+{{ /glyphs }}
+{{ #emptyBlocks }}
+<div></div>
+{{ /emptyBlocks }}

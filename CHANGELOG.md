@@ -1,6 +1,13 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## Unreleased
+### Addedd
+- Support for TrueType, OpenType and WOFF fonts (Using [FontForge](http://fontforge.github.io))
+
+### Fixed
+- Svg fotns weren't viewd on Windows 7+
+
 ## 0.2.1 - 2014-12-18
 ### Added
  - Support for themes
