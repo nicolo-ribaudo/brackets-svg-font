@@ -9,6 +9,9 @@
         }
     },
     "path": {
+        "package.json": {
+            "spaceUnits": 2
+        },
         "dist/**": {
             "linting.enabled": false
         }
