@@ -43,6 +43,21 @@ function parse(path, callback) {
     });
 }
 
+function convert(from, to, callback) {
+    isInstalled((no) => {
+        if (no === null) {
+            cp.exec(`fontforge -lang=ff -script converter.ff "${from}" "${to}"`, { cwd }, (error, stdout, stderr) => {
+                if (error) {
+                    console.log(error);
+                    callback(error);
+                } else {
+                    callback(null);
+                }
+            });
+        }
+    });
+}
+
 function init(domainManager) {
     if (!domainManager.hasDomain(DOMAIN)) {
         domainManager.registerDomain(DOMAIN, { major: 0, minor: 2 });
@@ -73,6 +88,23 @@ function init(domainManager) {
             name: "unicodes",
             type: "Array.<number>",
             description: "An array containing all the unicode values of the spported glyphs."
+        }]
+    );
+
+    domainManager.registerCommand(
+        DOMAIN,
+        "convert",
+        convert,
+        true,
+        "Convert a font",
+        [{
+            name: "from",
+            type: "string",
+            description: "The path of the input file"
+        }, {
+            name: "to",
+            type: "string",
+            description: "The path of the converted file"
         }]
     );
 }

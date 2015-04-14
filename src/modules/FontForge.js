@@ -17,3 +17,4 @@ function exec() {
 
 export let isInstalled = () => exec("isInstalled");
 export let parse = (path) => exec("parse", path);
+export let convert = (from, to) => exec("convert", from, to);
