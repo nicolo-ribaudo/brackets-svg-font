@@ -1,3 +1,4 @@
+import "../polyfills/babel-es6";
 import fontViewContainerTpl from "text!../html/font-view-container.html"; // text! comes from require.js
 
 const SYMBOLS = [ "$container", "file", "load", "loaded", "maxGlyphsPerLine", "promise", "render", "sort" ].reduce((symbols, name) => {

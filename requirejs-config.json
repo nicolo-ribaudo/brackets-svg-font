@@ -1,6 +1,7 @@
 {
     "paths": {
         "modules": "dist/modules",
-        "html": "dist/html"
+        "html": "dist/html",
+        "polyfills": "dist/polyfills"
     }
 }

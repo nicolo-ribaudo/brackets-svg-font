@@ -14,6 +14,9 @@
         },
         "dist/**": {
             "linting.enabled": false
+        },
+        "src/polyfills/**": {
+            "linting.enabled": false
         }
     }
 }
