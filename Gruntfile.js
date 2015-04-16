@@ -208,6 +208,7 @@ module.exports = function (grunt) {
                 grunt.task.run("clean:changed");
             } else {
                 grunt.config("htmlmin.changed.src", filepath);
+                grunt.config("htmlmin.changed.dest", changePathPrefix("src", "dist", filepath));
 
                 grunt.task.run("htmlmin:changed");
             }
