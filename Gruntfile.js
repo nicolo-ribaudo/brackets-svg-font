@@ -33,11 +33,6 @@ module.exports = function (grunt) {
         return path.join(to, path.relative(from, file));
     }
 
-    function changed(task, file) {
-        grunt.config(task + ".changed.src", file);
-        grunt.config(task + ".changed.dest", changePathPrefix("src", "dist", file));
-    }
-
     grunt.initConfig({
         autoprefixer: {
             dist: {
@@ -110,12 +105,10 @@ module.exports = function (grunt) {
                 sourceMapRoot: ".."
             },
             dist: {
-                files: [{
-                    expand: true,
-                    cwd: "dist/",
-                    src: "**/*.js",
-                    dest: "dist/"
-                }]
+                files: files([ "*.js", "modules/*.js", "node/*.js" ]).map(function (source) {
+                    source.cwd = "dist/";
+                    return source;
+                })
             },
             changed: {}
         },
