@@ -33,18 +33,29 @@ let projectCtxMenu = Menus.getContextMenu(Menus.ContextMenuIds.PROJECT_MENU),
         let from = ProjectManager.getSelectedItem().fullPath,
             dialog = Dialogs.showModalDialog(
                 CMD_CONVERT,
-                undefined,
-                convertDialogHtml
+                "Which format do you want to convert the font into?",
+                convertDialogHtml,
+                [{
+                    className: Dialogs.DIALOG_BTN_CLASS_PRIMARY,
+                    id: Dialogs.DIALOG_BTN_OK,
+                    text: "Convert!"
+                }, {
+                    className: Dialogs.DIALOG_BTN_CLASS_NORMAL,
+                    id: Dialogs.DIALOG_BTN_CANCEL,
+                    text: "Cancel"
+                }]
             );
 
-        return dialog.getPromise().then(() => {
-            let outputType = dialog.getElement().find("select").val(),
-                to = from.replace(/\.[a-z]+$/i, `.${outputType}`);
+        return dialog.getPromise().then(buttonId => {
+            if (buttonId === Dialogs.DIALOG_BTN_OK) {
+                let outputType = dialog.getElement().find("select").val(),
+                    to = from.replace(/\.[a-z]+$/i, `.${outputType}`);
 
-            showBusyStatus(`Converting ${from.match(fileNameRegExp)[0]} into ${to.match(fileNameRegExp)[0]}`);
+                showBusyStatus(`Converting ${from.match(fileNameRegExp)[0]} into ${to.match(fileNameRegExp)[0]}`);
 
-            return convert(from, to);
-        }).then(() => hideBusyStatus());
+                return convert(from, to).then(() => hideBusyStatus());
+            }
+        });
     });
 
 projectCtxMenu.addMenuDivider();

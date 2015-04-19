@@ -1,11 +1,15 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## Unreleased
+### Added
+- The conversion can be canceled.
+
 ## 0.4.0 - 2015-04-18
-## Addedd
+### Addedd
 - Font conversions.
 
-## Fixed
+### Fixed
 - The extension didn't work on linux (#3)
 
 ## 0.3.0 - 2015-04-06
