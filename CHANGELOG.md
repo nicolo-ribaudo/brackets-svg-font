@@ -2,8 +2,9 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
-### Added
+### Fixed
 - The conversion can be canceled.
+- The extension didn't work on linux (#3) (Again)
 
 ## 0.4.0 - 2015-04-18
 ### Addedd
