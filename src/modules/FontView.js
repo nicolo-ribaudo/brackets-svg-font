@@ -10,16 +10,6 @@ let ExtensionUtils = brackets.getModule("utils/ExtensionUtils"),
     WorkspaceManager = brackets.getModule("view/WorkspaceManager");
 
 /**
- * Get the current theme's background color
- */
-function getBgColor() {
-    let $CM = $("<div class='CodeMirror'>").appendTo("#editor-holder"),
-        bgColor = $CM.css("background-color");
-    $CM.remove();
-    return bgColor;
-}
-
-/**
  * @abstract
  */
 class FontView {
@@ -40,11 +30,10 @@ class FontView {
         this[SYMBOLS.promise] = this[SYMBOLS.load]();
 
         this.$el = $(Mustache.render(fontViewContainerTpl, {
-            path: file.fullPath,
-            background: getBgColor()
+            path: file.fullPath
         })).on("mouseenter", ".glyph", function () {
             let $this = $(this),
-                equator = $this.parents("#font-view").height() / 2,
+                equator = $this.parents(".font-view").height() / 2,
                 scrollPos = $this.parents(".font-container").scrollTop(),
                 top = $this.position().top;
             if (top - scrollPos > equator) {

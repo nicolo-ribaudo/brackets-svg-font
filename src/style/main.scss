@@ -1,4 +1,4 @@
-#font-view {
+.font-view {
     height: 100%;
     position: relative;
 
@@ -47,9 +47,14 @@
     }
 
     .font-container {
+        background-color: #f8f8f8;
         height: 100%;
         overflow-y: auto;
         padding: 15px;
+
+        .dark & {
+            background-color: #1d1f21;
+        }
 
         * {
             background-color: inherit;
@@ -87,6 +92,10 @@
                         position: relative;
                         text-align: center;
                         width: 70px;
+
+                        .dark & {
+                            color: #cccccc;
+                        }
 
                         svg {
                             height: 60px;
