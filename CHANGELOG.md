@@ -1,10 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## 0.4.1 - 2015-04-21
 ### Fixed
 - The conversion can be canceled.
 - The extension didn't work on linux (#3) (Again)
+- Glyphs were too dark using dark themes.
 
 ## 0.4.0 - 2015-04-18
 ### Addedd
