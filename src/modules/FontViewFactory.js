@@ -27,14 +27,17 @@ export default {
             pane.showView(view);
             return $.Deferred().resolve().promise();
         } else if (/\.svg$/i.test(file.fullPath)) {
+            let deferred = $.Deferred();
             view = new SvgFontView(file, pane.$el);
             pane.addView(view, true);
 
-            return view.promise().fail(() => DocumentManager.getDocumentForPath(file.fullPath).then(document => {
+            view.promise().then(() => deferred.resolve(), () => DocumentManager.getDocumentForPath(file.fullPath).then(document => {
                 let editor = new Editor(document, true, pane.$el);
                 pane.addView(editor, true);
-                return $.Deferred().resolve().promise();
-            }));
+                deferred.resolve();
+            }, () => deferred.reject()));
+
+            return deferred.promise();
         } else {
             return ffInstalled.then(() => {
                 view = new BinaryFontView(file, pane.$el);

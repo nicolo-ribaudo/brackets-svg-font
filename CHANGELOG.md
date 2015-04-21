@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## Unreleased
+### Fixed
+- `svg` files which aren't fonts couldn't be open.
+
 ## 0.4.1 - 2015-04-21
 ### Fixed
 - The conversion can be canceled.
