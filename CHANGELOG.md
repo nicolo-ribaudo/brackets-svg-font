@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## 0.4.2 - 2015-04-25
 ### Fixed
 - `svg` files which aren't fonts couldn't be open.
 - `svg` glyphs were too dark using dark themes.
