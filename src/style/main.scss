@@ -81,7 +81,7 @@
                     position: relative;
 
                     .preview {
-                        color: #000000;
+                        color: #000;
                         font: {
                             family: "Binary Font View";
                             size: 60px;
@@ -94,7 +94,7 @@
                         width: 70px;
 
                         .dark & {
-                            color: #cccccc;
+                            color: #ccc;
                         }
 
                         svg {
@@ -102,6 +102,10 @@
                             margin: 5px;
                             width: 60px;
                             transform: rotateX(180deg);
+
+                            .dark & path {
+                                fill: #ccc;
+                            }
                         }
                     }
 
