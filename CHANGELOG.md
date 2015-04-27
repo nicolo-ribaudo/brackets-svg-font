@@ -1,11 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## 0.4.3 - 2015-04-27
 ### Fixed
-- FontForge was opened at startup on Linux (#4)
+- FontForge was opened at startup on Linux ([#4](https://github.com/nicolo-ribaudo/brackets-svg-font/issues/4))
 
-  > Thanks to @glepretre and @fedor1113
+  > Thanks to [@glepretre](https://github.com/glepretre) and [@fedor1113](https://github.com/fedor1113)
 
 ## 0.4.2 - 2015-04-25
 ### Fixed
@@ -15,7 +15,7 @@ All notable changes to this project will be documented in this file.
 ## 0.4.1 - 2015-04-21
 ### Fixed
 - The conversion can be canceled.
-- The extension didn't work on linux (#3) (Again)
+- The extension didn't work on linux ([#3](https://github.com/nicolo-ribaudo/brackets-svg-font/issues/3)) (Again)
 - Glyphs were too dark using dark themes.
 
 ## 0.4.0 - 2015-04-18
@@ -23,7 +23,7 @@ All notable changes to this project will be documented in this file.
 - Font conversions.
 
 ### Fixed
-- The extension didn't work on linux (#3)
+- The extension didn't work on linux ([#3](https://github.com/nicolo-ribaudo/brackets-svg-font/issues/3))
 
 ## 0.3.0 - 2015-04-06
 ### Addedd
@@ -38,7 +38,7 @@ All notable changes to this project will be documented in this file.
    Now the background and the color of the glyphs are got by the theme
 
 ### Fixed
-- When a svg file is opened and it isn't a font, it will be shown as normal code. (Issue https://github.com/nicolo-ribaudo/brackets-svg-font/issues/1#issuecomment-67485742)
+- When a svg file is opened and it isn't a font, it will be shown as normal code. ([#1](https://github.com/nicolo-ribaudo/brackets-svg-font/issues/1#issuecomment-67485742))
 
 ## 0.2.0 - 2014-12-16
 ### Added
