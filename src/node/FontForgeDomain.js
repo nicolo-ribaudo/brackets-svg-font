@@ -11,9 +11,9 @@ let glyphRegExp = /{"unicode":\d+,"name":".*?"}/.source,
 
 function isInstalled(callback) {
     if (ffInstalled !== undefined) {
-        callback(ffInstalled ? null : "a");
+        callback(ffInstalled ? null : "FontForge not installed");
     } else {
-        cp.exec("fontforge -v", (error) => {
+        cp.exec("fontforge -version", (error) => {
             ffInstalled = !error;
             isInstalled(callback);
         });

@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## Unreleased
+### Fixed
+- FontForge was opened at startup on Linux (#4)
+
+  > Thanks to @glepretre and @fedor1113
+
 ## 0.4.2 - 2015-04-25
 ### Fixed
 - `svg` files which aren't fonts couldn't be open.
