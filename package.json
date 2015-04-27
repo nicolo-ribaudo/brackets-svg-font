@@ -2,7 +2,7 @@
   "name": "nicolo-ribaudo.brackets-svg-font",
   "version": "0.4.3",
   "title": "Brackets Font",
-  "description": "This extensions displays Svg, TrueType, OpenType and WOFF fonts. Please see \"More info...\".",
+  "description": "This extensions displays Svg, TrueType, OpenType and WOFF fonts. See \"More info...\" for dependencies.",
   "engines": {
     "brackets": ">=1.0"
   },
@@ -23,7 +23,7 @@
   ],
   "package-i18n": {
     "it": {
-      "description": "Questa estensione visualizza i font Svg, TrueType, OpenType e WOFF. Leggere \"Più info...\"."
+      "description": "Questa estensione visualizza i font Svg, TrueType, OpenType e WOFF. Leggere \"Più info...\" per i software necessari."
     }
   },
   "repository": {
