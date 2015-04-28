@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## Unreleased
+### Fixed
+- Conflict with other extensions using babel's polyfill (([#5](https://github.com/nicolo-ribaudo/brackets-svg-font/issues/5)))
+
 ## 0.4.3 - 2015-04-27
 ### Fixed
 - FontForge was opened at startup on Linux ([#4](https://github.com/nicolo-ribaudo/brackets-svg-font/issues/4))

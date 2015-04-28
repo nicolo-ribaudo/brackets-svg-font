@@ -1,4 +1,4 @@
-import "../polyfills/babel-es6";
+import Symbol from "../polyfills/Symbol";
 import FontView from "FontView";
 import svgFontViewGlyphsTpl from "text!../html/svg-font-view-glyphs.html";  // text! comes from require.js
 

@@ -47,7 +47,7 @@ module.exports = function (grunt) {
             },
             js: {
                 options: babelJsOptions,
-                files: files([ "main.js", "modules/*.js" ])
+                files: files([ "main.js", "modules/*.js", "polyfills/*.js" ])
             },
             node: {
                 files: files([ "node/*.js" ])
@@ -62,9 +62,6 @@ module.exports = function (grunt) {
         copy: {
             ff: {
                 files: files([ "node/fontforge/*.ff" ])
-            },
-            polyfills: {
-                files: files([ "polyfills/**" ])
             }
         },
         htmlmin: {
@@ -117,7 +114,7 @@ module.exports = function (grunt) {
                 spawn: false
             },
             js: {
-                files: [ "src/main.js", "src/modules/*.js", "src/node/*.js", "src/polyfills/**", "src/node/fontforge/*.ff" ],
+                files: [ "src/main.js", "src/modules/*.js", "src/node/*.js", "src/polyfills/*.js", "src/node/fontforge/*.ff" ],
             },
             html: {
                 files: [ "src/html/**" ]
@@ -159,7 +156,7 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask("compile:css", [ "sass:dist", "autoprefixer:dist" ]);
-    grunt.registerTask("compile:js", [ "jshint:src", "babel:js", "babel:node", "uglify:dist", "copy:polyfills", "clean:sourcemaps" ]);
+    grunt.registerTask("compile:js", [ "jshint:src", "babel:js", "babel:node", "uglify:dist", "clean:sourcemaps" ]);
 
     grunt.registerTask("init", [ "compile:js", "copy:ff", "htmlmin:dist", "compile:css" ]);
 
@@ -178,8 +175,6 @@ module.exports = function (grunt) {
                 grunt.task.run("clean:changed");
             } else if (grunt.file.doesPathContain("src/node/fontforge/", filepath)) {
                 grunt.task.run("copy:ff");
-            } else if (grunt.file.doesPathContain("src/polyfills/", filepath)) {
-                grunt.task.run("copy:polyfills");
             } else {
                 grunt.config("jshint.changed.src", filepath);
                 grunt.config("babel.changed.src", filepath);

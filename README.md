@@ -1,4 +1,4 @@
-# Brackets SVG Font
+# Brackets Font
 
 An [Adobe Brackets](https://github.com/adobe/brackets) extension that displays Svg, TrueType, OpenType and WOFF Fonts.
 

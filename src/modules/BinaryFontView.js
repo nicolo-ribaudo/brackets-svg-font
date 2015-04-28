@@ -1,4 +1,4 @@
-import "../polyfills/babel-es6";
+import Symbol from "../polyfills/Symbol";
 import FontView from "FontView";
 import * as FontForge from "FontForge";
 import binaryFontViewGlyphsTpl from "text!../html/binary-font-view-glyphs.html";  // text! comes from require.js
