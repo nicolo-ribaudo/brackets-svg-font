@@ -1,6 +1,4 @@
-/*jshint -W067 */ // Why?
-const uid = (id => key => `Symbol(${key || ""})_${(++id + Math.random()).toString(36)}`)(0);
-/*jshint +W067 */
+const uid = ((id) => key => `Symbol(${key || ""})_${(++id + Math.random()).toString(36)}`)(0);
 
 export default window.Symbol || function Symbol(description) {
     if (this instanceof Symbol) {
