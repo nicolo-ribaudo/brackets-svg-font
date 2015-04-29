@@ -96,7 +96,9 @@ class FontView {
      */
     updateLayout(forceRefresh) {
         if (forceRefresh || !this[SYMBOLS.loaded]) {
-            return this[SYMBOLS.load]().then(() => this[SYMBOLS.render]());
+            return this[SYMBOLS.load]().then(() => this.updateLayout());
+        } else {
+            this[SYMBOLS.render]();
         }
     }
 
@@ -147,7 +149,7 @@ class FontView {
      * Render glyphs
      * @private
      */
-    [SYMBOLS.render]() { // jshint ignore:line, Why jshint warns about a duplicated method?
+    [SYMBOLS.render]() { // jshint ignore:line, jshint/jshint#2350
         this.$el.find(".font-container > div").html("").append(this._renderGlyphs(this[SYMBOLS.maxGlyphsPerLine]));
     }
 
