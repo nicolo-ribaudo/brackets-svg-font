@@ -1,7 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## 0.4.4 - 2015-05-04
+### Added
+- Support for [Brackets Extensions Rating](https://github.com/dnbard/brackets-extension-rating)'s Daily Users stats.
+  They will be available at http://brackets.dnbard.com/extension/nicolo-ribaudo.brackets-svg-font.
+
 ### Fixed
 - Conflict with other extensions using babel's polyfill ([#5](https://github.com/nicolo-ribaudo/brackets-svg-font/issues/5))
 - Svg fonts couldn't be opened twice.
