@@ -126,6 +126,12 @@
                         width: calc(100% + 20px);
                         z-index: 2;
 
+                        .dark & {
+                            border: inherit {
+                                radius: 3px;
+                            };
+                        }
+
                         dt {
                             clear: left;
                             float: left;
