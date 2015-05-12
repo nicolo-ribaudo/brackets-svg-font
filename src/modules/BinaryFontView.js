@@ -1,12 +1,9 @@
-import Symbol from "../polyfills/Symbol";
-import FontView from "FontView";
+import SymbolRegistry from "SymbolRegistry";
+import FontView       from "FontView";
 import * as FontForge from "FontForge";
 import binaryFontViewGlyphsTpl from "text!../html/binary-font-view-glyphs.html";  // text! comes from require.js
 
-const SYMBOLS = [ "getType", "font", "type" ].reduce((symbols, name) => {
-    symbols[name] = Symbol(name);
-    return symbols;
-}, {});
+const Symbols = new SymbolRegistry();
 
 class BinaryFontView extends FontView {
 
@@ -15,7 +12,7 @@ class BinaryFontView extends FontView {
      */
     constructor(file) {
         super(...arguments);
-        this[SYMBOLS.type] = this[SYMBOLS.getType](file);
+        this[Symbols.get("type")] = this[Symbols.get("getType")](file);
     }
 
     /**
@@ -24,7 +21,7 @@ class BinaryFontView extends FontView {
     _load() {
         return FontForge.parse(this.getFile().fullPath).then((font) => {
             font.forEach((glyph) => glyph.unicode = glyph.unicode.toString(16));
-            this[SYMBOLS.font] = this._sort(font);
+            this[Symbols.get("font")] = this._sort(font);
         });
     }
 
@@ -33,10 +30,10 @@ class BinaryFontView extends FontView {
      */
     _renderGlyphs(maxGlyphsPerLine) {
         return Mustache.render(binaryFontViewGlyphsTpl, {
-            glyphs: this[SYMBOLS.font],
+            glyphs: this[Symbols.get("font")],
             emptyBlocks: new Array(maxGlyphsPerLine),
             path: this.getFile().fullPath,
-            type: this[SYMBOLS.type]
+            type: this[Symbols.get("type")]
         });
     }
 
@@ -45,7 +42,7 @@ class BinaryFontView extends FontView {
      * @param {File}
      * @return {String}
      */
-    [SYMBOLS.getType](file) {
+    [Symbols.get("getType")](file) {
         let extension = file.fullPath.match(/[a-z]+$/i)[0];
         return ({
             otf: "OpenType",

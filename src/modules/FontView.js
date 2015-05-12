@@ -1,10 +1,7 @@
-import Symbol from "../polyfills/Symbol";
+import SymbolRegistry from "SymbolRegistry";
 import fontViewContainerTpl from "text!../html/font-view-container.html"; // text! comes from require.js
 
-const SYMBOLS = [ "$container", "file", "load", "loaded", "maxGlyphsPerLine", "promise", "render", "sort" ].reduce((symbols, name) => {
-    symbols[name] = Symbol(name);
-    return symbols;
-}, {});
+const Symbols = new SymbolRegistry();
 
 let ExtensionUtils = brackets.getModule("utils/ExtensionUtils"),
     WorkspaceManager = brackets.getModule("view/WorkspaceManager");
@@ -23,11 +20,11 @@ class FontView {
             throw new Error("FontView is an abstract class: it can't be directly instantiated.");
         }
 
-        this[SYMBOLS.$container] = $container;
-        this[SYMBOLS.created] = false;
-        this[SYMBOLS.file] = file;
-        this[SYMBOLS.maxGlyphsPerLine] = Math.floor(screen.width / 100);
-        this[SYMBOLS.promise] = this[SYMBOLS.load]();
+        this[Symbols.get("$container")] = $container;
+        this[Symbols.get("created")] = false;
+        this[Symbols.get("file")] = file;
+        this[Symbols.get("maxGlyphsPerLine")] = Math.floor(screen.width / 100);
+        this[Symbols.get("promise")] = this[Symbols.get("load")]();
 
         this.$el = $(Mustache.render(fontViewContainerTpl, {
             path: file.fullPath
@@ -56,7 +53,7 @@ class FontView {
      * @public
      */
     create() {
-        this[SYMBOLS.$container].find(".pane-content").append(this.$el);
+        this[Symbols.get("$container")].find(".pane-content").append(this.$el);
         this.updateLayout();
     }
 
@@ -79,7 +76,7 @@ class FontView {
      * @return {File} File object that belongs to the view (may return null)
      */
     getFile() {
-        return this[SYMBOLS.file];
+        return this[Symbols.get("file")];
     }
 
     /**
@@ -95,10 +92,10 @@ class FontView {
      * @param {Boolean} forceRefresh
      */
     updateLayout(forceRefresh) {
-        if (forceRefresh || !this[SYMBOLS.loaded]) {
-            return this[SYMBOLS.load]().then(() => this.updateLayout());
+        if (forceRefresh || !this[Symbols.get("loaded")]) {
+            return this[Symbols.get("load")]().then(() => this.updateLayout());
         } else {
-            this[SYMBOLS.render]();
+            this[Symbols.get("render")]();
         }
     }
 
@@ -108,7 +105,7 @@ class FontView {
      * @type {$.Promise}
      */
     promise() {
-        return this[SYMBOLS.promise];
+        return this[Symbols.get("promise")];
     }
 
     /**
@@ -138,19 +135,19 @@ class FontView {
     }
 
     /**
-     * Load the font and set [SYMBOLS.loaded] to true
+     * Load the font and set [Symbol(loaded)] to true
      * @return {$.Promise}
      */
-    [SYMBOLS.load]() {
-        return this._load().then(() => this[SYMBOLS.loaded] = true);
+    [Symbols.get("load")]() {
+        return this._load().then(() => this[Symbols.get("loaded")] = true);
     }
 
     /**
      * Render glyphs
      * @private
      */
-    [SYMBOLS.render]() { // jshint ignore:line, jshint/jshint#2350
-        this.$el.find(".font-container > div").html("").append(this._renderGlyphs(this[SYMBOLS.maxGlyphsPerLine]));
+    [Symbols.get("render")]() { // jshint ignore:line, jshint/jshint#2350
+        this.$el.find(".font-container > div").html("").append(this._renderGlyphs(this[Symbols.get("maxGlyphsPerLine")]));
     }
 
 }

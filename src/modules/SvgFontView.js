@@ -1,11 +1,8 @@
-import Symbol from "../polyfills/Symbol";
+import SymbolRegistry from "SymbolRegistry";
 import FontView from "FontView";
 import svgFontViewGlyphsTpl from "text!../html/svg-font-view-glyphs.html";  // text! comes from require.js
 
-const SYMBOLS = [ "parse", "font" ].reduce((symbols, name) => {
-    symbols[name] = Symbol(name);
-    return symbols;
-}, {});
+const Symbols = new SymbolRegistry();
 
 class SvgFontView extends FontView {
 
@@ -23,7 +20,7 @@ class SvgFontView extends FontView {
                     if (!$font.length || !$font.find("glyph").length) {
                         deferred.reject(new Error("Not valid font"));
                     } else {
-                        this[SYMBOLS.font] = this._sort(this[SYMBOLS.parse]($font));
+                        this[Symbols.get("font")] = this._sort(this[Symbols.get("parse")]($font));
                         deferred.resolve();
                     }
                 } catch (e) {
@@ -42,8 +39,8 @@ class SvgFontView extends FontView {
      */
     _renderGlyphs(maxGlyphsPerLine) {
         return Mustache.render(svgFontViewGlyphsTpl, {
-            glyphs: this[SYMBOLS.font].glyphs,
-            size: this[SYMBOLS.font].size,
+            glyphs: this[Symbols.get("font")].glyphs,
+            size: this[Symbols.get("font")].size,
             emptyBlocks: new Array(maxGlyphsPerLine)
         });
     }
@@ -62,7 +59,7 @@ class SvgFontView extends FontView {
      * @param {jQuery} $font - The svg's font tag
      * @return {size:{upe:String,descendent:String},glyphs:Array.{unicode:String,name:String}}
      */
-    [SYMBOLS.parse]($font) {
+    [Symbols.get("parse")]($font) {
         let $fontFace = $font.find("font-face"),
             upe = $fontFace.attr("units-per-em"),
             descent = $fontFace.attr("descent"),
