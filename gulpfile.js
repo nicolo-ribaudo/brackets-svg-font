@@ -8,7 +8,10 @@ var del      = require("del"),
     semver   = require("semver"),
     $        = require("gulp-load-plugins")();
 
-var jsHintTask = lazypipe().pipe($.jshint).pipe($.jshint.reporter, "jshint-stylish");
+var jsHintTask = lazypipe()
+    .pipe($.jshint)
+    .pipe($.jshint.reporter, "jshint-stylish")
+    .pipe($.jshint.reporter, "fail");
 
 function adjustAMDPaths(required, from) {
     var prefix = "",
