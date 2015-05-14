@@ -57,13 +57,13 @@ class SvgFontView extends FontView {
      * Parse the svg file
      * @private
      * @param {jQuery} $font - The svg's font tag
-     * @return {size:{upe:String,descendent:String},glyphs:Array.{unicode:String,name:String}}
+     * @return {size:{from:int,to:int},glyphs:Array.{unicode:String,name:String}}
      */
     [Symbols.get("parse")]($font) {
         let $fontFace = $font.find("font-face"),
-            upe = $fontFace.attr("units-per-em"),
-            descent = $fontFace.attr("descent"),
-            glyphs = [].reduce.call($font.find("glyph"), (glyphs, glyph) => {
+            descent = +$fontFace.attr("descent"),
+            ascent = +$fontFace.attr("ascent"),
+            glyphs = $font.find("glyph").get().reduce((glyphs, glyph) => {
                 let $glyph = $(glyph),
                     unicode = $glyph.attr("unicode"),
                     d = $glyph.attr("d");
@@ -98,7 +98,10 @@ class SvgFontView extends FontView {
             }, []);
 
         return {
-            size: { upe, descent },
+            size: {
+                from: descent,
+                to: ascent - 2 * descent
+            },
             glyphs
         };
     }
