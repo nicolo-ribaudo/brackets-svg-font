@@ -63,8 +63,7 @@ class SvgFontView extends FontView {
      */
     [Symbols.get("parse")]($font) {
         let $fontFace = $font.find("font-face"),
-            descent = +$fontFace.attr("descent"),
-            ascent = +$fontFace.attr("ascent"),
+            size,
             glyphs = $font.find("glyph").get().reduce((glyphs, glyph) => {
                 let $glyph = $(glyph),
                     unicode = $glyph.attr("unicode"),
@@ -94,18 +93,65 @@ class SvgFontView extends FontView {
                     }
 
                     glyphs.push(description);
+
+                    size = this[Symbols.get("getGlyphSize")](d, size);
                 }
 
                 return glyphs;
             }, []);
 
         return {
-            size: {
-                from: descent,
-                to: ascent - 2 * descent
-            },
+            size,
             glyphs
         };
+    }
+
+    *[Symbols.get("parseSvgPath")](d) { // jshint ignore:line
+        let commands = "mzlhvcsqta",
+            numberRegExp = /[+-]?[\d\.]+(?:e[+-]?[\d\.]+)?/.source,
+            prev = { x: 0, y: 0 };
+        for (let i = 0; i < d.length; i++) {
+            let ch = d[i].toLowerCase();
+            if (~commands.indexOf(ch)) {
+                let re = {
+                        start: `^.{${i + 1}}[^${commands}]*?`,
+                        end: `\\s*(?:[${commands}]|$)`
+                    },
+                    coords = {};
+                switch (ch) {
+                    case "m":
+                    case "l":
+                    case "c":
+                    case "s":
+                    case "q":
+                    case "t":
+                    case "a":
+                        [ , coords.x, coords.y ] = d.match(new RegExp(`${re.start}(${numberRegExp})\\s*,?\\s*(${numberRegExp})${re.end}`, "i"));
+                        break;
+                    case "h":
+                    case "v":
+                        coords[ ch === "h" ? "x" : "y" ] = d.match(new RegExp(`${re.start}(${numberRegExp})${re.end}`, "i"))[1];
+                        break;
+                }
+                coords.x = +coords.x || 0;
+                coords.y = +coords.y || 0;
+                if (ch === d[i]) {
+                    coords.x += prev.x;
+                    coords.y += prev.y;
+                }
+                yield (prev = coords);
+            }
+        }
+    }
+
+    [Symbols.get("getGlyphSize")](d, prev = { top: 0, bottom: 0, right: 0, left: 0 }) { // jshint ignore:line
+        for (let { x, y } of this[Symbols.get("parseSvgPath")](d)) {
+            prev.top = Math.max(prev.top, y);
+            prev.bottom = Math.min(prev.bottom, y);
+            prev.right = Math.max(prev.right, x);
+            prev.left = Math.min(prev.left, x);
+        }
+        return prev;
     }
 }
 
