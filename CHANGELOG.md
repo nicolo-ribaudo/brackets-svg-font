@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 0.4.5 - 2015-05-16
+### Fixed
+- Tall SVG glyphs aren't cropped. ([#9](https://github.com/nicolo-ribaudo/brackets-svg-font/issues/9))
+
 ## 0.4.4 - 2015-05-04
 ### Added
 - Support for [Brackets Extensions Rating](https://github.com/dnbard/brackets-extension-rating)'s Daily Users stats.
