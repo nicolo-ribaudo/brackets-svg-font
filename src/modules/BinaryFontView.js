@@ -1,6 +1,6 @@
-import SymbolRegistry from "SymbolRegistry";
-import FontView       from "FontView";
-import * as FontForge from "FontForge";
+import SymbolRegistry from "./SymbolRegistry";
+import FontView       from "./FontView";
+import * as FontForge from "./FontForge";
 import binaryFontViewGlyphsTpl from "text!../html/binary-font-view-glyphs.html";  // text! comes from require.js
 
 const Symbols = new SymbolRegistry();

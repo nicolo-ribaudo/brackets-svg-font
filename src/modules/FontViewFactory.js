@@ -1,6 +1,6 @@
-import SvgFontView from "SvgFontView";
-import BinaryFontView from "BinaryFontView";
-import { isInstalled } from "FontForge";
+import SvgFontView     from "./SvgFontView";
+import BinaryFontView  from "./BinaryFontView";
+import { isInstalled } from "./FontForge";
 
 let DocumentManager = brackets.getModule("document/DocumentManager"),
     Editor          = brackets.getModule("editor/Editor").Editor;

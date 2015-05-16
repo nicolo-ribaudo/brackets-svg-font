@@ -1,4 +1,4 @@
-import { getPath } from "Utils";
+import { getPath } from "./Utils";
 
 const DOMAIN_NAME = "brackets-svg-font.fontforge-domain",
       DOMAIN_PATH = getPath("../node/FontForgeDomain.js");

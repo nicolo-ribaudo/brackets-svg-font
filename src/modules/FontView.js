@@ -1,4 +1,4 @@
-import SymbolRegistry from "SymbolRegistry";
+import SymbolRegistry from "./SymbolRegistry";
 import fontViewContainerTpl from "text!../html/font-view-container.html"; // text! comes from require.js
 
 const Symbols = new SymbolRegistry();

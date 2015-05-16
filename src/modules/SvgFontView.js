@@ -1,5 +1,7 @@
-import SymbolRegistry from "SymbolRegistry";
-import FontView from "FontView";
+/*jshint elision: true */
+
+import SymbolRegistry from "./SymbolRegistry";
+import FontView       from "./FontView";
 import svgFontViewGlyphsTpl from "text!../html/svg-font-view-glyphs.html";  // text! comes from require.js
 
 const Symbols = new SymbolRegistry();

@@ -1,7 +1,5 @@
 /*jshint proto: true */
 
-import Symbol from "../polyfills/Symbol";
-
 const symbols = Symbol();
 
 export default class SymbolRegistry {

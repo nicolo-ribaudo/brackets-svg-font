@@ -1,5 +1,5 @@
-import { convert } from "FontForge";
-import { showBusyStatus, hideBusyStatus } from "StatusBarUtils";
+import { convert } from "./FontForge";
+import { showBusyStatus, hideBusyStatus } from "./StatusBarUtils";
 import convertDialogTpl from "text!../html/convert-dialog.html";  // text! comes from require.js
 
 const CMD_CONVERT = "brackets-svg-font.convert";

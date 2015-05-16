@@ -1,9 +1,11 @@
 /*jshint node: true */
 
 var del      = require("del"),
+    fs       = require("fs"),
     gulp     = require("gulp"),
     lazypipe = require("lazypipe"),
     merge    = require("merge2"),
+    named    = require("vinyl-named"),
     path     = require("path"),
     semver   = require("semver"),
     $        = require("gulp-load-plugins")();
@@ -13,18 +15,19 @@ var jsHintTask = lazypipe()
     .pipe($.jshint.reporter, "jshint-stylish")
     .pipe($.jshint.reporter, "fail");
 
+var changed = lazypipe()
+    .pipe(function () {
+        return $.if(!("all" in $.util.env), $.changed("./dist"));
+    });
+
 function adjustAMDPaths(required, from) {
-    var prefix = "",
-        sepIndex = required.indexOf("!");
-
-    if (~sepIndex) {
-        prefix = required.slice(0, sepIndex + 1);
-        required = required.slice(sepIndex + 1);
+    if (/^babel-runtime/.test(required)) {
+        required = "thirdparty/" + required;
+        if (!fs.existsSync(path.join("./src", required + ".js"))) {
+            required += "/index";
+        }
     }
-
-    var file = path.relative(path.join(__dirname, "src"), path.join(path.dirname(from), required)).split(path.sep).join("/");
-
-    return prefix + file;
+    return required;
 }
 
 gulp.task("build", [ "compile" ], function () {
@@ -111,7 +114,7 @@ gulp.task("html", function () {
 });
 
 gulp.task("js.lint", function () {
-    return gulp.src("./src/**/*.js")
+    return gulp.src("./src/!(thirdparty)**/*.js")
         .pipe(jsHintTask());
 });
 
@@ -121,18 +124,43 @@ gulp.task("js.lint.all", [ "js.lint" ], function () {
 });
 
 gulp.task("js.compile", [ "js.lint" ], function () {
-
+    
     var compileEnd = lazypipe()
         .pipe($.uglify)
         .pipe($.sourcemaps.write, "../maps", { includeContent: false, sourceRoot: "../src" })
         .pipe(gulp.dest, "./dist");
 
     var jsCompile = gulp.src([ "./src/main.js", "./src/modules/*.js", "./src/polyfills/*.js" ], { base: "./src" })
+        .pipe(changed())
         .pipe($.sourcemaps.init())
-        .pipe($.babel({ modules: "amd", resolveModuleSource: adjustAMDPaths }))
+        .pipe($.babel({ modules: "amd", resolveModuleSource: adjustAMDPaths, optional: [ "runtime" ] }))
         .pipe(compileEnd());
+    
+    var thirdpartyCompile = gulp.src([
+        "./src/thirdparty/babel-runtime/core-js.js",
+        "./src/thirdparty/babel-runtime/core-js/**/*.js",
+        "./src/thirdparty/babel-runtime/helpers/**/*.js",
+        "./src/thirdparty/babel-runtime/regenerator/**/*.js"
+    ], { base: "./src" })
+        .pipe(changed())
+        .pipe(named(function (file) {
+            var filename = path.join(path.dirname(file.path), path.basename(file.path, ".js"));
+            return path.relative(path.join(__dirname, "src"), filename);
+        }))
+        .pipe($.webpack({
+            output: {
+                libraryTarget: "amd"
+            },
+            resolve: {
+                root: [ path.join(__dirname, "src/thirdparty") ]
+            },
+            cache: false
+        }))
+        //.pipe($.uglify())
+        .pipe(gulp.dest("./dist"));
 
     var nodeCompile = gulp.src("./src/node/*.js", { base: "./src" })
+        .pipe(changed())
         .pipe($.sourcemaps.init())
         .pipe($.babel())
         .pipe(compileEnd());
@@ -140,7 +168,7 @@ gulp.task("js.compile", [ "js.lint" ], function () {
     var ffCopy = gulp.src("./src/node/fontforge/*.ff")
         .pipe(gulp.dest("./dist/node/fontforge/"));
 
-    return merge(jsCompile, nodeCompile, ffCopy);
+    return merge(jsCompile, thirdpartyCompile, nodeCompile, ffCopy);
 
 });
 
