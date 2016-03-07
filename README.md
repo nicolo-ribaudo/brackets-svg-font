@@ -1,3 +1,7 @@
+# THIS EXTENSION IS NO LONGER MANTAINED
+
+I don't use [Adobe Brackets](https://github.com/adobe/brackets) anymore, so I'm not maintaining this extension. If you would like to maintain it, contact me at nicolo.ribaudo@gmail.com.
+
 # Brackets Font
 
 An [Adobe Brackets](https://github.com/adobe/brackets) extension that displays Svg, TrueType, OpenType and WOFF Fonts.
